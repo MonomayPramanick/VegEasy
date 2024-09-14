@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const path = require('path');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const session = require('express-session');
