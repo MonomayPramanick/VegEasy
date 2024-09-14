@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Pie Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/static/css/fruit.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            
+            justify-content: center;
+            align-items: center;
+            
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+        canvas {
+            max-width: 600px;
+            max-height: 600px;
+           
+        }
+    </style>
+</head>
+<body>
+     <header>
+      <div class="organic">
+        <img src="/static/images/organic1.jpeg" alt="Organic Banner" />
+      </div>
+
+      <div class="header-1">
+        <a href="/" class="logo"><i class="fas fa-shopping-basket"></i> Veg Easy</a>
+        <form action="" class="search-box-container">
+          <input type="search" id="search-box" placeholder="Search here..." />
+          <label for="search-box" class="fas fa-search"></label>
+        </form>
+      </div>
+
+      <div class="header-2">
+        <nav class="navbar">
+          <a href="/admin">Home</a>
+          <a href="/revenue">Revenue</a>
+          <a href="/users">Users</a>
+          <a href="/add-vegetable">Add Vegetable</a>
+          <a href="/add-fruits">Add Fruits</a>
+          <a href="/complain">See-Complain</a>
+                    <a href="/stock">Stock</a>
+
+        </nav>
+       
+      </div>
+    </header>
+    <canvas id="salesPieChart">
+
+    <script>
+        const vegetables = [
+            {"name": "Tomato", "Stock": 100},
+            {"name": "Bottle Gourd", "Stock": 50},
+            {"name": "Potato", "Stock": 80},
+            {"name": "Pea", "Stock": 70},
+            {"name": "Cucumber", "Stock": 50},
+            {"name": "Onion", "Stock": 60},
+            {"name": "Cauliflower", "Stock": 80},
+            {"name": "Bitter Gourd", "Stock": 50},
+            {"name": "Cabbage", "Stock": 60},
+            {"name": "Beat-root", "Stock": 80},
+            {"name": "Kidney Bean", "Stock": 90},
+            {"name": "Jack-fruit", "Stock": 40},
+            {"name": "Pumpkin", "Stock": 60},
+            {"name": "Capsicum", "Stock": 70},
+            {"name": "Brinjal", "Stock": 90},
+            {"name": "Spinach", "Stock": 80},
+            {"name": "Ginger", "Stock": 60},
+            {"name": "Turnip", "Stock": 80},
+            {"name": "Ladyfinger", "Stock": 60}
+        ];
+
+        const fruits = [
+            {"name": "Mango", "Stock": 50},
+            {"name": "Banana", "Stock": 40},
+            {"name": "Guava", "Stock": 40},
+            {"name": "Orange", "Stock": 30},
+            {"name": "Apple", "Stock": 30},
+            {"name": "Grape", "Stock": 20},
+            {"name": "Papaya", "Stock": 20},
+            {"name": "Watermelon", "Stock": 30},
+            {"name": "Pineapple", "Stock": 40},
+            {"name": "Pomegranate", "Stock": 50},
+            {"name": "Apricots", "Stock": 60},
+            {"name": "Cherry", "Stock": 40},
+            {"name": "Coconut", "Stock": 30},
+            {"name": "Kiwi", "Stock": 20},
+            {"name": "Lemon", "Stock": 30},
+            {"name": "Pear", "Stock": 30},
+            {"name": "Plum", "Stock": 40},
+            {"name": "Blackberry", "Stock": 30}
+        ];
+
+        // Combine vegetable and fruit data
+        const combinedData = [
+            ...vegetables.map(item => ({ name: item.name, stock: item.Stock })),
+            ...fruits.map(item => ({ name: item.name, stock: item.Stock }))
+        ];
+
+        // Prepare data for the chart
+        const labels = combinedData.map(item => item.name);
+        const stockData = combinedData.map(item => item.stock);
+
+        // Create the pie chart
+        const ctx = document.getElementById('salesPieChart').getContext('2d');
+        const salesPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Stock Distribution',
+                    data: stockData,
+                    backgroundColor: [
+                        '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#FF6F61', '#F7464A', 
+                        '#46BFBD', '#FDB45C', '#949FB1', '#4D5360', '#AC64AD', '#607D8B', '#8BC34A', '#FF5722', 
+                        '#9C27B0', '#3F51B5', '#2196F3', '#CDDC39'
+                    ],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                let totalStock = stockData.reduce((sum, value) => sum + value, 0);
+                                let percentage = (tooltipItem.raw / totalStock * 100).toFixed(2);
+                                return `${tooltipItem.label}: ${percentage}% (${tooltipItem.raw} items)`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+    </canvas>
+    
+</body>
+</html>

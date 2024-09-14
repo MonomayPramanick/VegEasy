@@ -1,0 +1,11 @@
+{
+    "welcome": "Welcome to the Vegetable Market!",
+    "priceTable": {
+      "vegetableName": "Vegetable Name",
+      "wholesalerPrice": "Wholesaler Price",
+      "retailerPrice": "Retailer Price",
+      "govPrice": "Government Price",
+      "inflationRate": "Inflation Rate"
+    }
+  }
+  

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fruits Store</title>
+    <link rel="stylesheet" href="/static/css/fruit.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="/static/js/fruit.js"></script>
+    <style>
+  body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-top: 20px;
+}
+
+table {
+  width: 80%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+th, td {
+  padding: 12px;
+  border: 1px solid #ccc;
+}
+
+th {
+  background-color: #28a745;
+  color: rgb(24, 15, 15);
+}
+</style>
+  </head>
+  <body>
+    <header>
+      <div class="organic">
+        <img src="/static/images/organic1.jpeg" alt="Organic Banner" />
+      </div>
+
+      <div class="header-1">
+        <a href="/" class="logo"><i class="fas fa-shopping-basket"></i> Veg Easy</a>
+        <form action="" class="search-box-container">
+          <input type="search" id="search-box" placeholder="Search here..." />
+          <label for="search-box" class="fas fa-search"></label>
+        </form>
+      </div>
+
+      <div class="header-2">
+        <nav class="navbar">
+          <a href="/admin">Home</a>
+          <a href="/revenue">Revenue</a>
+          <a href="/users">Users</a>
+          <a href="/add-vegetable">Add Vegetable</a>
+          <a href="/add-fruits">Add Fruits</a>
+          <a href="/complain">See-Complain</a>
+                    <a href="/stock">Stock</a>
+
+        </nav>
+       
+      </div>
+    </header>
+
+    <section class="home">
+      <h1>Revenue per month</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Month</th>
+            <th>Revenue</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          {{#each revenue}}
+          <tr>
+            <td>{{Month}}</td>
+            <td>{{Revenue}}</td>
+           
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </section>
+
+    <footer class="footer">
+      <p>&copy; 2024 Veg Easy. All rights reserved.</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/home.css">
+    <script src="/static/js/home.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    
+    <header>
+        <div class="header-1">
+            <a href="#" class="logo"><i class="fas fa-shopping-basket"></i>Veg Easy</a>
+            <form action="" class="search-box-container">
+                <input type="search" id="search-box" placeholder="    Search here..">
+                <label for="search-box" class=" fas fa-search"></label>
+            </form>
+        </div>
+        <div class="header-2">
+            <div id="menu-bar" class="fas fa-bars"></div>
+            <nav class="navbar">
+                <a href="/">home</a>
+               
+            <select id="nname" onchange="navigateToPage()">
+                <option value="">Select Category</option>
+                <option value="/fruit">Fruits</option>
+                <option value="/veg">Vegetables</option>
+            </select>
+
+                
+                <a href="/login">Register/Login</a>
+                <a href="/market-overview">Market-overview</a>
+                <a href="/complaint-feedback">Feedback</a>
+                <a href="/bestseller">Find Bestseller</a>
+            </nav>
+            <div class="icons">
+                <a href="/cart" class="fas fa-shopping-cart"></a>
+                <a href="#" class="fas fa-heart"></a>
+                <a href="/profile" class="fas fa-user-circle"></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Remaining body content here -->
+    <section class="home" id="home">
+        <p class="intro"> WELCOME TO VEG EASY !</p>
+        
+
+        <div class="organic">
+            <img src="/static/images/organic1.jpeg" alt="" srcset="">
+        </div>
+
+        <div class="line">
+            <p><h1>"Healthy Eating Made Easy"</h1>
+                Browse, select, and order fresh vegetables from the comfort of your home. Our commitment is to provide you with the best produce, every day.</p>
+        </div>
+      
+        <div class="content">
+            
+            <img src="/static/images/fruit.jpeg">
+        </div>
+       
+    </section>
+
+    <section class="banner-container">
+        <div class="banner">
+            <img src="/static/images/offer.jpeg" alt="">
+            <div class="content"> 
+                <a href="/veg" class="btn">check out</a>
+            </div>
+        </div>
+        <div class="banner">
+            <img src="/static/images/offer2.jpeg" alt="">
+            <div class="content">
+                <a href="/veg" class="btn">check out</a>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="footer">
+        <div class="box-container">
+            <div class="box">
+                <a href="#" class="logo"><i class="fas fa-shopping-basket"></i>Veg Easy</a>
+                <p>An online vegetable store for fresh, organic vegetables at the best prices</p>
+                <div class="share">
+                    <a href="https://www.facebook.com/" class="btn fab fa-facebook-f"></a>
+                    <a href="https://x.com/?lang=en" class="btn fab fa-twitter"></a>
+                    <a href="https://www.instagram.com/" class="btn fab fa-instagram"></a>
+                    <a href="#" class="btn fab fa-linkedin"></a>
+                </div>
+            </div>
+            <div class="box">
+                <h3>Our location</h3>
+                <div class="links">
+                    <a href="#">Hyderabad</a>
+                    <a href="#">Warangal</a>
+                    <a href="#">Medchal</a>
+                    <a href="#">Nizamabad</a>
+                    <a href="#">Kurnool</a>
+                </div>
+            </div>
+            <div class="box">
+                <h3>Quick links</h3>
+                <div class="links">
+                    <a href="/">home</a>
+                   <a href="/fruit">Fruits</a>
+                    <a href="veg">vegetable</a>
+                    <a href="/about">about</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+    function navigateToPage() {
+        var selectElement = document.getElementById('nname');
+        var selectedValue = selectElement.value;
+        if (selectedValue) {
+            window.location.href = selectedValue;
+        }
+    }
+</script>
+
+    <script src="project.js"></script>
+</body>
+</html>

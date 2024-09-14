@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best Retailers in West Bengal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/about.css">
+    <script src="/static/js/home.js" crossorigin="anonymous"></script>
+    <style>
+        #map {
+            height: 600px;  /* Set height of the map */
+            width: 100%;    /* Set width to full page width */
+        }
+        .about, .contact {
+            background: #fff;
+            padding: 80px 20px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        .footer {
+            background: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Reuse Header -->
+    <header>
+        <div class="header-1">
+            <a href="#" class="logo"><i class="fas fa-shopping-basket"></i>Veg Easy</a>
+            <form action="" class="search-box-container">
+                <input type="search" id="search-box" placeholder="Search here..">
+                <label for="search-box" class="fas fa-search"></label>
+            </form>
+        </div>
+        <div class="header-2">
+            <div id="menu-bar" class="fas fa-bars"></div>
+            <nav class="navbar">
+                <a href="/">home</a>
+                <select id="nname" onchange="navigateToPage()">
+                    <option value="">Select Category</option>
+                    <option value="/fruit">Fruits</option>
+                    <option value="/veg">Vegetables</option>
+                </select>
+                <a href="/login">Register/Login</a>
+                <a href="/market-overview">Market-overview</a>
+                <a href="/complaint-feedback">Feedback</a>
+                <a href="/bestseller">Find Bestseller</a>
+            </nav>
+            <div class="icons">
+                <a href="/cart" class="fas fa-shopping-cart"></a>
+                <a href="#" class="fas fa-heart"></a>
+                <a href="/profile" class="fas fa-user-circle"></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Map Section -->
+    <section id="map-section">
+        <h1>Find the Best Retailer in West Bengal</h1>
+        <div id="map"></div>
+    </section>
+
+    <section class="footer">
+        <div class="box-container">
+            <div class="box">
+                <a href="#" class="logo"><i class="fas fa-shopping-basket"></i>Veg Easy</a>
+                <p>An online vegetable store for fresh, organic vegetables at the best prices</p>
+                <div class="share">
+                    <a href="https://www.facebook.com/" class="btn fab fa-facebook-f"></a>
+                    <a href="https://x.com/?lang=en" class="btn fab fa-twitter"></a>
+                    <a href="https://www.instagram.com/" class="btn fab fa-instagram"></a>
+                    <a href="#" class="btn fab fa-linkedin"></a>
+                </div>
+            </div>
+            <div class="box">
+                <h3>Our location</h3>
+                <div class="links">
+                    <a href="#">Hyderabad</a>
+                    <a href="#">Warangal</a>
+                    <a href="#">Medchal</a>
+                    <a href="#">Nizamabad</a>
+                    <a href="#">Kurnool</a>
+                </div>
+            </div>
+            <div class="box">
+                <h3>Quick links</h3>
+                <div class="links">
+                    <a href="/">home</a>
+                    <a href="/fruits">fruits</a>
+                    <a href="/veg">Vegetables</a>
+                    <a href="/about">About Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function navigateToPage() {
+            var selectElement = document.getElementById('nname');
+            var selectedValue = selectElement.value;
+            if (selectedValue) {
+                window.location.href = selectedValue;
+            }
+        }
+    </script>
+
+    <!-- Google Maps API Script -->
+    <script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2RlU74ud9dpxvoMSeATeSI2FNubirKsg&callback=initMap">
+    </script>
+
+    <script>
+        // Retailer data for West Bengal
+        const retailers = [
+            { name: 'Raju', lat: 22.5726, lng: 88.3639, rating: 4.5 },  // Kolkata
+            { name: 'Rinku', lat: 22.5626, lng: 88.3589, rating: 4.7 },  // Nearby Kolkata
+            { name: 'Sourav', lat: 22.5756, lng: 88.3700, rating: 4.9 } ,
+            { name: 'Gouri', lat: 22.5256, lng: 88.2900, rating: 4.5 } ,
+            { name: 'Sion', lat: 22.5156, lng: 88.2000, rating: 4.6 } ,
+            { name: 'Tuku', lat: 22.5356, lng: 88.1500, rating: 4.7 } ,
+            { name: 'Tinku', lat: 22.5056, lng: 88.3000, rating: 4.8 }   // Nearby Kolkata
+        ];
+
+        function initMap() {
+            const center = { lat: 22.5726, lng: 88.3639 };  // Kolkata
+
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 12,
+                center: center,
+            });
+
+            // Add markers for each retailer
+            retailers.forEach(retailer => {
+                const marker = new google.maps.Marker({
+                    position: { lat: retailer.lat, lng: retailer.lng },
+                    map: map,
+                    title: `${retailer.name} (Rating: ${retailer.rating})`
+                });
+
+                const infowindow = new google.maps.InfoWindow({
+                    content: `<h3>${retailer.name}</h3><p>Rating: ${retailer.rating}</p>`
+                });
+
+                marker.addListener("click", () => {
+                    infowindow.open(map, marker);
+                });
+            });
+        }
+    </script>
+</body>
+</html>

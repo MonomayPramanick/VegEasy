@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fruits Store</title>
+    <link rel="stylesheet" href="/static/css/fruit.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="/static/js/fruit.js"></script>
+    <style> /* Home Section */
+         .active {
+            background-color: #28a745;
+            border-radius: 5px;
+        }
+
+        .home {
+            max-width: 600px;
+            margin: 30px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .home h1 {
+            text-align: center;
+            color: #28a745;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="number"],
+        .form-group input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+</style>
+  </head>
+  <body>
+    <header>
+      <div class="organic">
+            <img src="/static/images/organic1.jpeg" alt="" srcset="">
+        </div>
+    
+      <div class="header-1">
+        <a href="/" class="logo"><i class="fas fa-shopping-basket"></i>Veg Easy</a>
+        <form action="" class="search-box-container">
+          <input type="search" id="search-box" placeholder="Search here..">
+          <label for="search-box" class="fas fa-search"></label>
+        </form>
+      </div>
+      <div class="header-2">
+        <nav class="navbar">
+          
+          
+                   <a href="/admin">home</a>
+                <a href="/revenue">Revenue</a>
+                <a href="/users">Users</a>
+                <a href="/add-vegetable">Add-Vegetable</a>
+                <a href="/add-fruits" >Add-Fruits</a>
+                <a href="/complain">See-Complain</a>
+                          <a href="/stock">Stock</a>
+
+        </nav>
+        <div class="icons">
+        
+          <a href="/profile" class="fas fa-user-circle"></a>
+        </div>
+      </div>
+    </header>
+
+   
+ <section class="home">
+         
+        <h1>Add New Fruit</h1>
+        <form action="/admin/add-fruit" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="name">Fruit Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="price">Price:</label>
+                <input type="number" id="price" name="price" required>
+            </div>
+            <div class="form-group">
+                <label for="picture">Picture (optional):</label>
+                <input type="file" id="picture" name="picture">
+            </div>
+            <button type="submit" class="btn">Add Fruit</button>
+        </form>
+    </section>
+    <footer class="footer">
+      <p>© 2024 Veg Easy. All rights reserved.</p>
+    </footer>
+    
+    
+  </body>
+</html>

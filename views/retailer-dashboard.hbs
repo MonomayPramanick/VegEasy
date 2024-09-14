@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eMandi Retailer Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(to bottom right, #E6F7FF, #E6FFE6);
+    color: #333;
+    line-height: 1.6;
+}
+
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar styles */
+.sidebar {
+    width: 250px;
+    background-color: #fff;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    background: linear-gradient(to right, #4CAF50, #2196F3);
+    color: #fff;
+    padding: 20px;
+}
+
+.logo h1 {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    color: #4B5563;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.nav-item svg {
+    margin-right: 10px;
+}
+
+.nav-item:hover, .nav-item.active {
+    background: linear-gradient(to right, #E6F7FF, #E6FFE6);
+    color: #4CAF50;
+    border-right: 4px solid #4CAF50;
+}
+
+/* Main content styles */
+.main-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.header h2 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.search-container {
+    position: relative;
+}
+
+.search-input {
+    padding: 8px 15px 8px 35px;
+    border: 1px solid #D1D5DB;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9CA3AF;
+}
+
+.btn-icon {
+    background: none;
+    border: 1px solid #D1D5DB;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #4CAF50;
+}
+
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #4CAF50;
+}
+
+.user-name {
+    font-weight: 500;
+}
+
+/* Dashboard content styles */
+.dashboard-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.metric-card {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.metric-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.metric-header h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.metric-header svg {
+    color: #fff;
+}
+
+.metric-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.bg-green {
+    background: linear-gradient(to right, #4CAF50, #45A049);
+}
+
+.bg-blue {
+    background: linear-gradient(to right, #2196F3, #1E88E5);
+}
+
+.bg-yellow {
+    background: linear-gradient(to right, #FFC107, #FFB300);
+}
+
+.bg-purple {
+    background: linear-gradient(to right, #9C27B0, #8E24AA);
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.card-header {
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bg-gradient {
+    background: linear-gradient(to right, #4CAF50, #2196F3);
+    color: #fff;
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.btn-secondary {
+    background-color: #fff;
+    color: #4CAF50;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn-secondary:hover {
+    background-color: #E8F5E9;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table th, .data-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #E5E7EB;
+}
+
+.data-table th {
+    background-color: #F3F4F6;
+    font-weight: 600;
+}
+
+.data-table tr:hover {
+    background-color: #F9FAFB;
+}
+
+.badge {
+    padding: 4px 8px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.in-stock {
+    background-color: #E8F5E9;
+    color: #4CAF50;
+}
+
+.low-stock {
+    background-color: #FFF3E0;
+    color: #FF9800;
+}
+
+.delivered {
+    background-color: #E8F5E9;
+    color: #4CAF50;
+}
+
+.processing {
+    background-color: #E3F2FD;
+    color: #2196F3;
+}
+
+.shipped {
+    background-color: #E1F5FE;
+    color: #03A9F4;
+}
+
+.pending {
+    background-color: #FFF3E0;
+    color: #FF9800;
+}
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>eMandi</h1>
+            </div>
+            <nav>
+                <a href="#" class="nav-item active" data-tab="dashboard">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    Dashboard
+                </a>
+              
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <h2>Retailer Dashboard</h2>
+                <div class="header-actions">
+                    <div class="search-container">
+                        <input type="search" placeholder="Search products..." class="search-input">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                    </div>
+                    <button class="btn-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+                    </button>
+                    <div class="user-menu">
+                        <img src="/placeholder.svg?height=40&width=40" alt="User avatar" class="user-avatar">
+                        <span class="user-name">Priya Sharma</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="chevron-down"><path d="m6 9 6 6 6-6"/></svg>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <!-- Metrics Cards -->
+                <div class="metrics-grid">
+                    <div class="metric-card bg-green">
+                        <div class="metric-header">
+                            <h3>Total Sales</h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+                        </div>
+                        <div class="metric-value">₹45,678</div>
+                    </div>
+                    <div class="metric-card bg-blue">
+                        <div class="metric-header">
+                            <h3>Active Listings</h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z"/><path d="m3 9 2.45-4.9A2 2 0 0 1 7.24 3h9.52a2 2 0 0 1 1.8 1.1L21 9"/><path d="M12 3v6"/></svg>
+                        </div>
+                        <div class="metric-value">38</div>
+                    </div>
+                    <div class="metric-card bg-yellow">
+                        <div class="metric-header">
+                            <h3>Pending Orders</h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></svg>
+                        </div>
+                        <div class="metric-value">12</div>
+                    </div>
+                    <div class="metric-card bg-purple">
+                        <div class="metric-header">
+                            <h3>Customer Rating</h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <div class="metric-value">4.8/5</div>
+                    </div>
+                </div>
+
+                <!-- Inventory Overview -->
+                <div class="card">
+                    <div class="card-header bg-gradient">
+                        <h3>Inventory Overview</h3>
+                        <button class="btn-secondary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                            Add Product
+                        </button>
+                    </div>
+                    <div class="card-content">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Category</th>
+                                    <th>Stock</th>
+                                    <th>Price</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Fresh Tomatoes</td>
+                                    <td>Vegetables</td>
+                                    <td>250 units</td>
+                                    <td>₹40/kg</td>
+                                    <td><span class="badge in-stock">In Stock</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Organic Apples</td>
+                                    <td>Fruits</td>
+                                    <td>180 units</td>
+                                    <td>₹120/kg</td>
+                                    <td><span class="badge low-stock">Low Stock</span></td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>Mangoes</td>
+                                    <td>fruits</td>
+                                    <td>100 units</td>
+                                    <td>₹100/kg</td>
+                                    <td><span class="badge in-stock">In Stock</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Recent Orders -->
+                <div class="card">
+                    <div class="card-header bg-gradient">
+                        <h3>Recent Orders</h3>
+                    </div>
+                    <div class="card-content">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Customer</th>
+                                    <th>Products</th>
+                                    <th>Total</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ORD001</td>
+                                    <td>Rahul Verma</td>
+                                    <td>Tomatoes, Onions</td>
+                                    <td>₹280</td>
+                                    <td><span class="badge delivered">Delivered</span></td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Sales Chart -->
+                <div class="card">
+                    <div class="card-header bg-gradient">
+                        <h3>Monthly Sales</h3>
+                    </div>
+                    <div class="card-content">
+                        <canvas id="salesChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    // Navigation
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(item => {
+        item.addEventListener('click', function() {
+            navItems.forEach(i => i.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+    // User menu dropdown (simplified version)
+    const userMenu = document.querySelector('.user-menu');
+    userMenu.addEventListener('click', function() {
+        alert('User menu clicked. Add your dropdown logic here.');
+    });
+
+    // Sales Chart
+    const ctx = document.getElementById('salesChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            datasets: [{
+                label: 'Monthly Sales',
+                data: [12000, 19000, 15000, 22000, 18000, 25000, 30000, 28000, 32000, 35000, 40000, 45000],
+                backgroundColor: 'rgba(76, 175, 80, 0.2)',
+                borderColor: 'rgba(76, 175, 80, 1)',
+                borderWidth: 2,
+                pointBackgroundColor: 'rgba(76, 175, 80, 1)',
+                pointRadius: 4,
+                pointHoverRadius: 6,
+                tension: 0.3
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function(value, index, values) {
+                            return '₹' + value.toLocaleString();
+                        }
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                },
+                title: {
+                    display: true,
+                    text: 'Monthly Sales (Last 12 Months)',
+                    font: {
+                        size: 16
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return 'Sales: ₹' + context.parsed.y.toLocaleString();
+                        }
+                    }
+                }
+            }
+        }
+    });
+});
+    </script>
+</body>
+</html>

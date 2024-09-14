@@ -1,0 +1,194 @@
+
+   
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veg Easy - About Us & Contact Us</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/about.css">
+    <script src="/static/js/home.js" crossorigin="anonymous"></script>
+ <style>
+
+        .about, .contact {
+            background: #fff;
+            padding: 80px 20px; /* Increased padding for more space */
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .about h1, .contact h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .about p, .contact p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .contact label {
+            font-size: 16px;
+        }
+
+        .contact input, .contact textarea {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        .contact button {
+            background: #333;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .footer {
+            background: #fff;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .footer .box-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .footer .box {
+            flex: 1;
+            margin: 10px;
+        }
+
+        .footer .box a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .footer .share a {
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    
+    <header>
+        <div class="header-1">
+            <a href="#" class="logo"><i class="fas fa-shopping-basket"></i>Veg Easy</a>
+            <form action="" class="search-box-container">
+                <input type="search" id="search-box" placeholder="Search here..">
+                <label for="search-box" class="fas fa-search"></label>
+            </form>
+        </div>
+        <div class="header-2">
+            <div id="menu-bar" class="fas fa-bars"></div>
+            <nav class="navbar">
+                <a href="/">home</a>
+                <select id="nname" onchange="navigateToPage()">
+    <option value="">Select Category</option>
+    <option value="/fruit">Fruits</option>
+    <option value="/veg">Vegetables</option>
+</select>
+
+             
+                <a href="/login">Register/Login</a>
+                <a href="/market-overview">Market-overview</a>
+                <a href="/complaint-feedback">Feedback</a>
+                <a href="/bestseller">Find Bestseller</a>
+            </nav>
+            <div class="icons">
+                <a href="/cart" class="fas fa-shopping-cart"></a>
+                <a href="#" class="fas fa-heart"></a>
+                <a href="/profile" class="fas fa-user-circle"></a>
+            </div>
+        </div>
+    </header>
+
+
+    <section class="about" id="about">
+        <div class="content">
+            <h1>About Us</h1>
+            <p>Welcome to Veg Easy, your number one source for fresh and organic fruits and vegetables. Our goal is to provide you with the highest quality produce at the best prices. We are committed to sustainability and supporting local farmers.</p>
+            <p>Our team is passionate about healthy living and is dedicated to ensuring that every product we offer meets our stringent quality standards. Thank you for choosing Veg Easy!</p>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="content"  >
+            <h1>Contact Us</h1>
+            <p>If you have any questions or feedback, please feel free to reach out to us. We are here to assist you and ensure you have the best experience with Veg Easy.</p>
+         <h1>Submit a Complaint or Feedback</h1>
+
+
+    <form action="/complaint-feedback" method="POST">
+        <label for="complaint">Your Complaint/Feedback:</label>
+        <textarea id="complaintText" name="complaintText" required></textarea>
+        <button type="submit">Submit</button>
+    </form>
+
+        </div>
+    </section>
+
+    <section class="footer">
+        <div class="box-container">
+            <div class="box">
+                <a href="#" class="logo"><i class="fas fa-shopping-basket"></i>Veg Easy</a>
+                <p>An online vegetable store for fresh, organic vegetables at the best prices</p>
+                <div class="share">
+                    <a href="https://www.facebook.com/" class="btn fab fa-facebook-f"></a>
+                    <a href="https://x.com/?lang=en" class="btn fab fa-twitter"></a>
+                    <a href="https://www.instagram.com/" class="btn fab fa-instagram"></a>
+                    <a href="#" class="btn fab fa-linkedin"></a>
+                </div>
+            </div>
+            <div class="box">
+                <h3>Our location</h3>
+                <div class="links">
+                    <a href="#">Hyderabad</a>
+                    <a href="#">Warangal</a>
+                    <a href="#">Medchal</a>
+                    <a href="#">Nizamabad</a>
+                    <a href="#">Kurnool</a>
+                </div>
+            </div>
+            <div class="box">
+                <h3>Quick links</h3>
+                <div class="links">
+                    <a href="/">home</a>
+                    <a href="/fruits">fruits</a>
+                    <a href="/veg">Vegetable</a>
+                     <a href="/about">About Us</a>
+             
+                </div>
+            </div>
+        </div>
+    </section>
+        <script>
+    function navigateToPage() {
+        var selectElement = document.getElementById('nname');
+        var selectedValue = selectElement.value;
+        if (selectedValue) {
+            window.location.href = selectedValue;
+        }
+    }
+</script>
+
+    <script src="project.js"></script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fruits Store</title>
+    <link rel="stylesheet" href="/static/css/fruit.css">
+    <link rel="stylesheet" href="/static/css/cart.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script>
+        function removeItem(row) {
+            var table = document.getElementById("cartTable");
+            table.deleteRow(row.parentNode.parentNode.rowIndex);
+            updateTotal();
+        }
+
+        function saveForLater(row) {
+            alert("Item saved for later!");
+        }
+
+        function updateCart() {
+            var table = document.getElementById("cartTable");
+            var rows = table.rows;
+            var items = [];
+            for (var i = 1; i < rows.length; i++) {
+                var cells = rows[i].cells;
+                var product = cells[0].innerText;
+                var quantity = parseInt(cells[1].innerText);
+                items.push({ product, quantity });
+            }
+            fetch('/cart/update', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ items })
+            }).then(response => {
+                if (response.ok) {
+                    alert('Cart updated!');
+                } else {
+                    alert('Failed to update cart.');
+                }
+            });
+        }
+
+       function checkout() {
+    // Redirect to /payment
+    window.location.href = "/payment";
+}
+
+
+        function updateTotal() {
+            var table = document.getElementById("cartTable");
+            var rows = table.rows;
+            var total = 0;
+            for (var i = 1; i < rows.length; i++) {
+                var cells = rows[i].cells;
+                var price = parseFloat(cells[2].innerText.replace('$', ''));
+                var quantity = parseInt(cells[1].innerText);
+                total += price * quantity;
+            }
+            document.getElementById("totalAmount").innerText = "Total: $" + total.toFixed(2);
+        }
+
+        document.getElementById('nname').addEventListener('change', function() {
+            var selectedValue = this.value;
+            if (selectedValue) {
+                window.location.href = selectedValue;
+            }
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="header-1">
+            <a href="/" class="logo"><i class="fas fa-shopping-basket"></i>Veg Easy</a>
+            <form action="" class="search-box-container">
+                <input type="search" id="search-box" placeholder="Search here..">
+                <label for="search-box" class="fas fa-search"></label>
+            </form>
+        </div>
+        <div class="header-2">
+            <nav class="navbar">
+                <a href="/">Home</a>
+                <select id="nname" onchange="navigateToPage()">
+                    <option value="">Select Category</option>
+                    <option value="/fruit">Fruits</option>
+                    <option value="/veg">Vegetables</option>
+                </select>
+                <a href="/login">Register/Login</a>
+                <a href="/market-overview">Market-overview</a>
+                <a href="/complaint-feedback">Feedback</a>
+            </nav>
+            <div class="icons">
+                <a href="/cart" class="fas fa-shopping-cart"></a>
+                <a href="#" class="fas fa-heart"></a>
+                <a href="/profile" class="fas fa-user-circle"></a>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="cart">
+            <h2>Your Cart</h2>
+            <table id="cartTable">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    {{#each cart.items}}
+                    <tr>
+                        <td>{{this.productId}}</td>
+                        <td>{{this.quantity}}</td>
+                        <td>{{this.price}}</td>
+
+                        <td class="product-actions">
+                            <button onclick="removeItem(this)">Remove</button>
+                            <button onclick="saveForLater(this)">Save for Later</button>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            <div class="total">
+                <p id="totalAmount">Total: $0.00</p>
+            </div>
+            <div class="actions">
+                <button onclick="updateCart()">Update Cart</button>
+                <button onclick="checkout()">Checkout</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function navigateToPage() {
+            var selectElement = document.getElementById('nname');
+            var selectedValue = selectElement.value;
+            if (selectedValue) {
+                window.location.href = selectedValue;
+            }
+        }
+    </script>
+</body>
+</html>

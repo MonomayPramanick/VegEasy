@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eMandi Wholeseller Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(to bottom right, #EBF4FF, #E6E6FA);
+    color: #333;
+    line-height: 1.6;
+}
+
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar styles */
+.sidebar {
+    width: 250px;
+    background-color: #fff;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    background: linear-gradient(to right, #4F46E5, #7C3AED);
+    color: #fff;
+    padding: 20px;
+}
+
+.logo h1 {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    color: #4B5563;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.nav-item svg {
+    margin-right: 10px;
+}
+
+.nav-item:hover, .nav-item.active {
+    background: linear-gradient(to right, #EBF4FF, #E6E6FA);
+    color: #4F46E5;
+    border-right: 4px solid #4F46E5;
+}
+
+/* Main content styles */
+.main-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0,0.1);
+    margin-bottom: 20px;
+}
+
+.header h2 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.search-container {
+    position: relative;
+}
+
+.search-input {
+    padding: 8px 15px 8px 35px;
+    border: 1px solid #D1D5DB;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9CA3AF;
+}
+
+.btn-icon {
+    background: none;
+    border: 1px solid #D1D5DB;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #4F46E5;
+}
+
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #4F46E5;
+}
+
+.user-name {
+    font-weight: 500;
+}
+
+/* Dashboard content styles */
+.dashboard-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.metric-card {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.metric-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.metric-header h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.metric-header svg {
+    color: #fff;
+}
+
+.metric-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.bg-green {
+    background: linear-gradient(to right, #10B981, #059669);
+}
+
+.bg-yellow {
+    background: linear-gradient(to right, #FBBF24, #D97706);
+}
+
+.bg-blue {
+    background: linear-gradient(to right, #3B82F6, #2563EB);
+}
+
+.bg-purple {
+    background: linear-gradient(to right, #8B5CF6, #7C3AED);
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.card-header {
+    padding: 15px 20px;
+}
+
+.bg-gradient {
+    background: linear-gradient(to right, #4F46E5, #7C3AED);
+    color: #fff;
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.orders-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.orders-table th, .orders-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #E5E7EB;
+}
+
+.orders-table th {
+    background-color: #F3F4F6;
+    font-weight: 600;
+}
+
+.orders-table tr:hover {
+    background-color: #F9FAFB;
+}
+
+.status {
+    padding: 4px 8px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.shipped {
+    background-color: #D1FAE5;
+    color: #065F46;
+}
+
+.processing {
+    background-color: #FEF3C7;
+    color: #92400E;
+}
+
+.delivered {
+    background-color: #DBEAFE;
+    color: #1E40AF;
+}
+
+.pending {
+    background-color: #FEE2E2;
+    color: #991B1B;
+}
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>eMandi</h1>
+            </div>
+            <nav>
+                <a href="#" class="nav-item active" data-tab="dashboard">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    Dashboard
+                </a>
+              
+              
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <h2>Wholeseller Dashboard</h2>
+                <div class="header-actions">
+                    <div class="search-container">
+                        <input type="search" placeholder="Search..." class="search-input">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                    </div>
+                    <button class="btn-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+                    </button>
+                    <div class="user-menu">
+                        <img src="/placeholder.svg?height=40&width=40" alt="User avatar" class="user-avatar">
+                        <span class="user-name">John Doe</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="chevron-down"><path d="m6 9 6 6 6-6"/></svg>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <!-- Metrics Cards -->
+                <div class="metrics-grid">
+                    <div class="metric-card bg-green">
+                        <div class="metric-header">
+                            <h3>Total Sales</h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+                        </div>
+                        <div class="metric-value">₹1,234,567</div>
+                    </div>
+                    <div class="metric-card bg-yellow">
+                        <div class="metric-header">
+                            <h3>Pending Orders</h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z"/><path d="m3 9 2.45-4.9A2 2 0 0 1 7.24 3h9.52a2 2 0 0 1 1.8 1.1L21 9"/><path d="M12 3v6"/></svg>
+                        </div>
+                        <div class="metric-value">23</div>
+                    </div>
+                    <div class="metric-card bg-blue">
+                        <div class="metric-header">
+                            <h3>Available Stock</h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z"/><path d="m3 9 2.45-4.9A2 2 0 0 1 7.24 3h9.52a2 2 0 0 1 1.8 1.1L21 9"/><path d="M12 3v6"/></svg>
+                        </div>
+                        <div class="metric-value">1,500 units</div>
+                    </div>
+                    <div class="metric-card bg-purple">
+                        <div class="metric-header">
+                            <h3>Revenue</h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></svg>
+                        </div>
+                        <div class="metric-value">₹987,654</div>
+                    </div>
+                </div>
+
+                <!-- Recent Orders Table -->
+                <div class="card">
+                    <div class="card-header bg-gradient">
+                        <h3>Recent Orders</h3>
+                    </div>
+                    <div class="card-content">
+                        <table class="orders-table">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Customer</th>
+                                    <th>Product</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>001</td>
+                                    <td>Amit Kumar</td>
+                                    <td>Tomatoes</td>
+                                    <td>500 kg</td>
+                                    <td>₹15,000</td>
+                                    <td><span class="status shipped">Shipped</span></td>
+                                </tr>
+                                <tr>
+                                    <td>002</td>
+                                    <td>Priya Singh</td>
+                                    <td>Potatoes</td>
+                                    <td>1000 kg</td>
+                                    <td>₹20,000</td>
+                                    <td><span class="status processing">Processing</span></td>
+                                </tr>
+                                <tr>
+                                    <td>003</td>
+                                    <td>Rahul Sharma</td>
+                                    <td>Onions</td>
+                                    <td>750 kg</td>
+                                    <td>₹18,750</td>
+                                    <td><span class="status delivered">Delivered</span></td>
+                                </tr>
+                                <tr>
+                                    <td>004</td>
+                                    <td>Neha Gupta</td>
+                                    <td>Carrots</td>
+                                    <td>300 kg</td>
+                                    <td>₹9,000</td>
+                                    <td><span class="status pending">Pending</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Top Selling Products Chart -->
+                <div class="card">
+                    <div class="card-header bg-gradient">
+                        <h3>Top Selling Products</h3>
+                    </div>
+                    <div class="card-content">
+                        <canvas id="topSellingProductsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    // Navigation
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(item => {
+        item.addEventListener('click', function() {
+            navItems.forEach(i => i.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+    // User menu dropdown (simplified version)
+    const userMenu = document.querySelector('.user-menu');
+    userMenu.addEventListener('click', function() {
+        alert('User menu clicked. Add your dropdown logic here.');
+    });
+
+    // Top Selling Products Chart
+    const ctx = document.getElementById('topSellingProductsChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Tomatoes', 'Potatoes', 'Onions', 'Carrots', 'Cucumbers'],
+            datasets: [{
+                label: 'Sales in kg',
+                data: [1200, 1900, 1500, 800, 600],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.7)',
+                    'rgba(54, 162, 235, 0.7)',
+                    'rgba(255, 206, 86, 0.7)',
+                    'rgba(75, 192, 192, 0.7)',
+                    'rgba(153, 102, 255, 0.7)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                },
+                title: {
+                    display: true,
+                    text: 'Top Selling Products (Last 30 Days)',
+                    font: {
+                        size: 16
+                    }
+                }
+            }
+        }
+    });
+});
+    </script>
+</body>
+</html>

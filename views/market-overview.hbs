@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/fruit.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Market Overview</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            border-collapse: collapse;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+      <style>
+  body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-top: 20px;
+}
+
+table {
+  width: 80%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+th, td {
+  padding: 12px;
+  border: 1px solid #ccc;
+}
+
+th {
+  background-color: #28a745;
+  color: rgb(24, 15, 15);
+}
+
+    </style>
+</head>
+<body>
+     <header>
+    
+      <div class="header-1">
+        <a href="/" class="logo"><i class="fas fa-shopping-basket"></i>Veg Easy</a>
+        <form action="" class="search-box-container">
+          <input type="search" id="search-box" placeholder="Search here..">
+          <label for="search-box" class="fas fa-search"></label>
+        </form>
+      </div>
+      <div class="header-2">
+        <nav class="navbar">
+          <a href="/">Home</a>
+          <select id="nname" onchange="navigateToPage()">
+            <option value="">Select Category</option>
+            <option value="/fruit">Fruits</option>
+            <option value="/veg">Vegetables</option>
+          </select>
+          <a href="/login">Register/Login</a>
+                <a href="/market-overview">Market-overview</a>
+                <a href="/complaint-feedback">Feedback</a>
+                <a href="/bestseller">Find Bestseller</a>
+        </nav>
+        <div class="icons">
+          <a href="/cart" class="fas fa-shopping-cart"></a>
+          <a href="#" class="fas fa-heart"></a>
+          <a href="/profile" class="fas fa-user-circle"></a>
+        </div>
+      </div>
+    </header>
+    <h1>Market Overview</h1>
+
+    <h2>Vegetables</h2>
+    <table id="vegetableTable">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Type</th>
+                <th>vegetable Name</th>
+                <th>Wholesaler Price</th>
+                <th>Retailer Price</th>
+                <th>Government Price</th>
+              
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <h2>Fruits</h2>
+    <table id="fruitTable">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Type</th>
+                <th>Name</th>
+                <th>Wholesaler Price</th>
+                <th>Retailer Price</th>
+                <th>Government Price</th>
+            
+            
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        const vegetables = [ {
+      "productId": 1,
+      "category": "vegetable",
+      "name": "Tomato",
+      "wholesalerPrice": 60,
+      "retailerPrice": 80,
+      "govPrice": 50,
+    },
+    {
+      "productId": 2,
+      "category": "vegetable",
+      "name": "Bottle Gourd",
+      "wholesalerPrice": 40,
+      "retailerPrice": 55,
+      "govPrice": 35,
+    },
+    {
+      "productId": 3,
+      "category": "vegetable",
+      "name": "Potato",
+      "wholesalerPrice": 35,
+      "retailerPrice": 50,
+      "govPrice": 30,
+    },
+    {
+      "productId": 4,
+      "category": "vegetable",
+      "name": "Pea",
+      "wholesalerPrice": 120,
+      "retailerPrice": 150,
+      "govPrice": 110,
+    },
+    {
+      "productId": 5,
+      "category": "vegetable",
+      "name": "Cucumber",
+      "wholesalerPrice": 60,
+      "retailerPrice": 80,
+      "govPrice": 55,
+    },
+    {
+      "productId": 6,
+      "category": "vegetable",
+      "name": "Onion",
+      "wholesalerPrice": 60,
+      "retailerPrice": 80,
+      "govPrice": 50,
+    },
+    {
+      "productId": 7,
+      "category": "vegetable",
+      "name": "Cauliflower",
+      "wholesalerPrice": 45,
+      "retailerPrice": 60,
+      "govPrice": 40,
+     
+    },
+    {
+      "productId": 8,
+      "category": "vegetable",
+      "name": "Bitter Gourd",
+      "wholesalerPrice": 32,
+      "retailerPrice": 45,
+      "govPrice": 30,
+      
+    },
+    {
+      "productId": 9,
+      "category": "vegetable",
+      "name": "Cabbage",
+      "wholesalerPrice": 58,
+      "retailerPrice": 75,
+      "govPrice": 50,
+     
+    },
+    {
+      "productId": 10,
+      "category": "vegetable",
+      "name": "Beat-root",
+      "wholesalerPrice": 45,
+      "retailerPrice": 60,
+      "govPrice": 40,
+    
+    },
+    {
+      "productId": 11,
+      "category": "vegetable",
+      "name": "Kidney Bean",
+      "wholesalerPrice": 150,
+      "retailerPrice": 180,
+      "govPrice": 140,
+   
+    },
+    {
+      "productId": 12,
+      "category": "vegetable",
+      "name": "Jack-fruit",
+      "wholesalerPrice": 65,
+      "retailerPrice": 85,
+      "govPrice": 60,
+  
+    },
+    {
+      "productId": 13,
+      "category": "vegetable",
+      "name": "Pumpkin",
+      "wholesalerPrice": 60,
+      "retailerPrice": 75,
+      "govPrice": 55,
+    
+    },
+    {
+      "productId": 14,
+      "category": "vegetable",
+      "name": "Capsicum",
+      "wholesalerPrice": 100,
+      "retailerPrice": 130,
+      "govPrice": 90,
+    
+    },
+    {
+      "productId": 15,
+      "category": "vegetable",
+      "name": "Brinjal",
+      "wholesalerPrice": 55,
+      "retailerPrice": 70,
+      "govPrice": 50,
+
+    },
+    {
+      "productId": 16,
+      "category": "vegetable",
+      "name": "Spinach",
+      "wholesalerPrice": 60,
+      "retailerPrice": 80,
+      "govPrice": 55,
+     
+    },
+    {
+      "productId": 17,
+      "category": "vegetable",
+      "name": "Ginger",
+      "wholesalerPrice": 100,
+      "retailerPrice": 130,
+      "govPrice": 90,
+  
+    },
+    {
+      "productId": 18,
+      "category": "vegetable",
+      "name": "Turnip",
+      "wholesalerPrice": 80,
+      "retailerPrice": 100,
+      "govPrice": 70,
+
+    },
+    {
+      "productId": 19,
+      "category": "vegetable",
+      "name": "Ladyfinger",
+      "wholesalerPrice": 60,
+      "retailerPrice": 75,
+      "govPrice": 55,
+ 
+    } ];
+        const fruits = [ {
+      "productId": 1,
+      "category": "fruit",
+      "name": "Mango",
+      "wholesalerPrice": 120,
+      "retailerPrice": 150,
+      "govPrice": 100,
+
+    },
+    {
+      "productId": 2,
+      "category": "fruit",
+      "name": "Banana",
+      "wholesalerPrice": 5,
+      "retailerPrice": 8,
+      "govPrice": 4,
+  
+    },
+    {
+      "productId": 3,
+      "category": "fruit",
+      "name": "Guava",
+      "wholesalerPrice": 60,
+      "retailerPrice": 80,
+      "govPrice": 55,
+  
+    },
+    {
+      "productId": 4,
+      "category": "fruit",
+      "name": "Orange",
+      "wholesalerPrice": 70,
+      "retailerPrice": 90,
+      "govPrice": 65,
+
+    },
+    {
+      "productId": 5,
+      "category": "fruit",
+      "name": "Apple",
+      "wholesalerPrice": 130,
+      "retailerPrice": 160,
+      "govPrice": 120,
+  
+    },
+    {
+      "productId": 6,
+      "category": "fruit",
+      "name": "Grape",
+      "wholesalerPrice": 90,
+      "retailerPrice": 110,
+      "govPrice": 85,
+  
+    },
+    {
+      "productId": 7,
+      "category": "fruit",
+      "name": "Papaya",
+      "wholesalerPrice": 100,
+      "retailerPrice": 130,
+      "govPrice": 95,
+  
+    },
+    {
+      "productId": 8,
+      "category": "fruit",
+      "name": "Watermelon",
+      "wholesalerPrice": 20,
+      "retailerPrice": 30,
+      "govPrice": 15,
+  
+    },
+    {
+      "productId": 9,
+      "category": "fruit",
+      "name": "Pineapple",
+      "wholesalerPrice": 80,
+      "retailerPrice": 100,
+      "govPrice": 75,
+
+    },
+    {
+      "productId": 10,
+      "category": "fruit",
+      "name": "Pomegranate",
+      "wholesalerPrice": 120,
+      "retailerPrice": 150,
+      "govPrice": 110,
+
+    },
+    {
+      "productId": 11,
+      "category": "fruit",
+      "name": "Apricots",
+      "wholesalerPrice": 95,
+      "retailerPrice": 120,
+      "govPrice": 85,
+ 
+    },
+    {
+      "productId": 12,
+      "category": "fruit",
+      "name": "Cherry",
+      "wholesalerPrice": 130,
+      "retailerPrice": 160,
+      "govPrice": 120,
+  
+    },
+    {
+      "productId": 13,
+      "category": "fruit",
+      "name": "Coconut",
+      "wholesalerPrice": 50,
+      "retailerPrice": 65,
+   
+    },
+    {
+      "productId": 14,
+      "category": "fruit",
+      "name": "Figs",
+      "wholesalerPrice": 70,
+      "retailerPrice": 90,
+      "govPrice": 65,
+ 
+    },
+    {
+      "productId": 15,
+      "category": "fruit",
+      "name": "Kiwi",
+      "wholesalerPrice": 150,
+      "retailerPrice": 180,
+      "govPrice": 140,
+   
+    },
+    {
+      "productId": 16,
+      "category": "fruit",
+      "name": "Lemon",
+      "wholesalerPrice": 3,
+      "retailerPrice": 5,
+      "govPrice": 2,
+      },
+    {
+      "productId": 17,
+      "category": "fruit",
+      "name": "Pear",
+      "wholesalerPrice": 70,
+      "retailerPrice": 90,
+      "govPrice": 60,
+    
+    },
+    {
+      "productId": 18,
+      "category": "fruit",
+      "name": "Strawberry",
+      "wholesalerPrice": 140,
+      "retailerPrice": 160,
+      "govPrice": 120,
+   
+    },
+    {
+        "productId": 19,
+        "category": "fruit",
+        "name": "Plum",
+        "wholesalerPrice": 40,
+        "retailerPrice": 55,
+        "govPrice": 20,
+     
+      },
+      {
+        "productId": 20,
+        "category": "fruit",
+        "name": "Blackberry",
+        "wholesalerPrice": 80,
+        "retailerPrice": 99,
+        "govPrice": 50,
+      
+      } ];
+
+        function populateTable(tableId, data) {
+            const table = document.getElementById(tableId);
+            const tbody = table.querySelector('tbody');
+            tbody.innerHTML = '';
+
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                Object.values(item).forEach(value => {
+                    const cell = document.createElement('td');
+                    cell.textContent = value;
+                    row.appendChild(cell);
+                });
+                tbody.appendChild(row);
+            });
+        }
+
+        populateTable('vegetableTable', vegetables);
+        populateTable('fruitTable', fruits);
+    </script>
+</body>
+</html>

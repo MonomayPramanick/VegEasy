@@ -1,0 +1,11 @@
+{
+    "welcome": "¡Bienvenido al Mercado de Verduras!",
+    "priceTable": {
+      "vegetableName": "Nombre de la Verdura",
+      "wholesalerPrice": "Precio del Mayorista",
+      "retailerPrice": "Precio del Minorista",
+      "govPrice": "Precio del Gobierno",
+      "inflationRate": "Tasa de Inflación"
+    }
+  }
+  

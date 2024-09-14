@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fruits Store</title>
+    <link rel="stylesheet" href="/static/css/fruit.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="/static/js/fruit.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="organic">
+            <img src="/static/images/organic1.jpeg" alt="" srcset="">
+        </div>
+    
+      <div class="header-1">
+        <a href="/" class="logo"><i class="fas fa-shopping-basket"></i>Veg Easy</a>
+        <form action="" class="search-box-container">
+          <input type="search" id="search-box" placeholder="Search here..">
+          <label for="search-box" class="fas fa-search"></label>
+        </form>
+      </div>
+      <div class="header-2">
+        <nav class="navbar">
+          <a href="/">Home</a>
+          <select id="nname" onchange="navigateToPage()">
+            <option value="">Select Category</option>
+            <option value="/fruit">Fruits</option>
+            <option value="/veg">Vegetables</option>
+          </select>
+          <a href="/login">Register/Login</a>
+                <a href="/market-overview">Market-overview</a>
+                <a href="/complaint-feedback">Feedback</a>
+                <a href="/bestseller">Find Bestseller</a>
+        </nav>
+        <div class="icons">
+          <a href="/cart" class="fas fa-shopping-cart"></a>
+          <a href="#" class="fas fa-heart"></a>
+          <a href="/profile" class="fas fa-user-circle"></a>
+        </div>
+      </div>
+    </header>
+
+    <main class="product-section">
+      <h1>Fresh Fruits</h1>
+      <div class="product-grid">
+        <!-- Product Card Template -->
+        <div class="product-card" data-product-id="1">
+          <img src="http://getwallpapers.com/wallpaper/full/3/9/3/1384169-mango-wallpaper-1920x1080-for-1080p.jpg" alt="Mango" />
+          <h2>Mango</h2>
+          <p>&#8377;120 / kg</p>
+          <button class="btn-add">Add to Cart</button>
+        </div>
+        
+
+           <div class="product-card"  data-product-id="1">
+          <img src="http://getwallpapers.com/wallpaper/full/3/9/3/1384169-mango-wallpaper-1920x1080-for-1080p.jpg" alt="Mango" />
+          <h2>Mango</h2>
+          <p>&#8377;120 / kg</p>
+          <button class="btn-add">Add to Cart</button>
+        </div>
+        <div class="product-card" data-product-id="2">
+          <img src="https://tse2.mm.bing.net/th?id=OIP.98Wto5wCLXt_NMBpoOHHQQHaFj&pid=Api&P=0&h=180" alt="Banana" />
+          <h2>Banana</h2>
+          <p>&#8377;5 / piece</p>
+          <button class="btn-add">Add to Cart</button>
+        </div>
+        <div class="product-card" data-product-id="3">
+          <img src="https://tse2.mm.bing.net/th?id=OIP.U6L3TxvMuOhQn6hG9GFXkQAAAA&pid=Api&P=0&h=180" alt="Guava" />
+          <h2>Guava</h2>
+          <p>&#8377;60 / bunch</p>
+          <button class="btn-add">Add to Cart</button>
+        </div>
+
+        <div class="product-card" data-product-id="4">
+          <img src="https://tse1.mm.bing.net/th?id=OIP.vQCouv9OKwxNaTB83R6QCAHaEo&pid=Api&P=0&h=180" alt="Orange" />
+          <h2>Orange</h2>
+          <p>&#8377;70 / kg</p>
+          <button class="btn-add">Add to Cart</button>
+        </div>
+
+        <div class="product-card" data-product-id="5">
+          <img src="https://tse1.mm.bing.net/th?id=OIP.eClWIWbPMWQuATwfpJKCZwHaE8&pid=Api&P=0&h=180" alt="Apple" />
+          <h2>Apple</h2>
+          <p>&#8377;130 / kg</p>
+          <button class="btn-add">Add to Cart</button>
+        </div>
+
+        <div class="product-card" data-product-id="6">
+          <img src="https://tse2.mm.bing.net/th?id=OIP.I4b5XgSFkRbGHngPQRd4nQHaEz&pid=Api&P=0&h=180" alt="Grape" />
+          <h2>Grape</h2>
+          <p>&#8377;90 / kg</p>
+          <button class="btn-add">Add to Cart</button>
+        </div>
+
+        <div class="product-card" data-product-id="7">
+          <img src="https://t3.ftcdn.net/jpg/03/42/72/34/360_F_342723481_QLUF3pc1QpdFJBK39UDrDgtiTB6QK2mb.jpg" alt="Papaya" />
+          <h2>Papaya</h2>
+          <p>&#8377;100 / kg</p>
+          <button class="btn-add">Add to Cart</button>
+        </div>
+
+        <div class="product-card" data-product-id="8">
+          <img src="https://tse3.mm.bing.net/th?id=OIP.BRmcCW-BEZGlrXREetOxHwHaE7&pid=Api&P=0&h=180" alt="Watermelon" />
+          <h2>Watermelon</h2>
+          <p>&#8377;20 / kg</p>
+          <button class="btn-add">Add to Cart</button>
+        </div>
+
+        <div class="product-card" data-product-id="9">
+          <img src="https://tse4.mm.bing.net/th?id=OIP.vzST49ASTsXkKiJWfheuNwHaEK&pid=Api&P=0&h=180" alt="Pineapple" />
+          <h2>Pineapple</h2>
+          <p>&#8377;80 / piece</p>
+          <button class="btn-add">Add to Cart</button>
+        </div>
+
+        <div class="product-card" data-product-id="10">
+            <img src="https://tse2.mm.bing.net/th?id=OIP.0V4z5dAOwR8suVZpKuvH4gHaE8&pid=Api&P=0&h=180" alt="Pomegranate">
+            <h2>Pomegranate</h2>
+            <p>&#8377;120 / kg</p>
+            <button class="btn-add">Add to Cart</button>
+        </div>
+
+        <div class="product-card" data-product-id="11">
+            <img src="https://tse4.mm.bing.net/th?id=OIP.hNL90KPu4NjoT3zQ07gxqgHaFJ&pid=Api&P=0&h=180" alt="Apricots">
+            <h2>Apricots</h2>
+            <p>&#8377;95 / kg</p>
+            <button class="btn-add">Add to Cart</button>
+        </div>
+
+        <div class="product-card" data-product-id="12">
+            <img src="https://tse3.mm.bing.net/th?id=OIP.vmq50HinaYA7BTAogu2u8wHaE8&pid=Api&P=0&h=180" alt="Cherry">
+            <h2>Cherry</h2>
+            <p>&#8377;130 / kg</p>
+            <button class="btn-add">Add to Cart</button>
+        </div>
+
+        <div class="product-card" data-product-id="13">
+            <img src="https://tse1.mm.bing.net/th?id=OIP.K374qiwGdfDjcGAhr4-yNAHaEo&pid=Api&P=0&h=180" alt="Coconut">
+            <h2>Coconut</h2>
+            <p>&#8377;50 / piece</p>
+            <button class="btn-add">Add to Cart</button>
+        </div>
+
+        <div class="product-card" data-product-id="14">
+            <img src="https://tse1.mm.bing.net/th?id=OIP.3FIQaw1eJ_W--JQMvci6JwHaHa&pid=Api&P=0&h=180" alt="Figs">
+            <h2>Figs</h2>
+            <p>&#8377;70 / kg</p>
+            <button class="btn-add">Add to Cart</button>
+        </div>
+
+        <div class="product-card" data-product-id="15">
+            <img src="https://tse3.mm.bing.net/th?id=OIP.1sqiH8lHmzeG5RPQ1d86xwHaFD&pid=Api&P=0&h=180" alt="Kiwi">
+            <h2>Kiwi</h2>
+            <p>&#8377;120 / kg</p>
+            <button class="btn-add">Add to Cart</button>
+        </div>
+
+        <div class="product-card" data-product-id="16">
+            <img src="https://tse4.mm.bing.net/th?id=OIP.amhk0ix7InAsHYbwevOoDwHaEo&pid=Api&P=0&h=180" alt="Lemon">
+            <h2>Lemon</h2>
+            <p>&#8377;5 / piece</p>
+            <button class="btn-add">Add to Cart</button>
+        </div>
+
+        <div class="product-card" data-product-id="17">
+            <img src="https://tse2.mm.bing.net/th?id=OIP.Ib7PDBES44GhKEBexed9RQHaE4&pid=Api&P=0&h=180" alt="Pear">
+            <h2>Pear</h2>
+            <p>&#8377;90 / kg</p>
+            <button class="btn-add">Add to Cart</button>
+        </div>
+
+        <div class="product-card" data-product-id="18">
+            <img src="https://tse1.mm.bing.net/th?id=OIP.fFHZDHj91vn_pKCVE80WWQHaEo&pid=Api&P=0&h=180" alt="Strawberry">
+            <h2>Strawberry</h2>
+            <p>&#8377;160 / kg</p>
+            <button class="btn-add">Add to Cart</button>
+        </div>
+
+        <div class="product-card" data-product-id="19">
+            <img src="https://coolwallpapers.me/picsup/3104055-fruit_fruits_harvest_plum_violet-purple.jpg" alt="Plum">
+            <h2>Plum</h2>
+            <p>&#8377;55 / kg</p>
+            <button class="btn-add">Add to Cart</button>
+        </div>
+
+        <div class="product-card" data-product-id="20">
+            <img src="https://tse4.mm.bing.net/th?id=OIP.zKUJfaPr_6cxZZDx2UHTXgHaE8&pid=Api&P=0&h=180" alt="Carrot">
+            <h2>Blackberry</h2>
+            <p>&#8377;99 / kg</p>
+            <button class="btn-add">Add to Cart</button>
+        </div>
+        <!-- Add more product cards here -->
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p>© 2024 Veg Easy. All rights reserved.</p>
+    </footer>
+    
+    <script>
+      function navigateToPage() {
+        var selectElement = document.getElementById('nname');
+        var selectedValue = selectElement.value;
+        if (selectedValue) {
+          window.location.href = selectedValue;
+        }
+      }
+
+      document.querySelectorAll('.btn-add').forEach(button => {
+        button.addEventListener('click', async function () {
+          const productId = this.closest('.product-card').getAttribute('data-product-id');
+          const userId = 'your_user_id'; 
+
+          try {
+            const response = await fetch('/cart/add', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ productId, userId })
+            });
+
+            const result = await response.json();
+            if (response.ok) {
+              alert('Item added to cart successfully!');
+            } else {
+              console.error(result.message);
+            }
+          } catch (error) {
+            console.error('Error adding item to cart:', error);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

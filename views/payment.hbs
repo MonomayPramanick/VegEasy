@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - E-Mandi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Reset and Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            width: 80%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        header {
+            background-color: #4CAF50;
+            color: var(--white);
+            padding: 1rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        header h1 {
+            font-size: 1.8rem;
+        }
+        .payment-options {
+            margin-top: 2rem;
+        }
+        .payment-option {
+            background-color: var(--white);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .payment-option img {
+            max-width: 100px;
+            margin-bottom: 1rem;
+        }
+        .payment-option button {
+            background-color: #4CAF50;
+            color: var(--white);
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color var(--transition-speed);
+        }
+        .payment-option button:hover {
+            background-color: #388E3C;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            background-color: #4CAF50;
+            color: var(--white);
+            font-size: 1rem;
+            margin-top: 3rem;
+        }
+        footer p {
+            margin: 0;
+        }
+  header    a {
+    text-decoration: none;
+    float: left; /* or float: right; */
+    color: black;
+    font-size: 30px;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Payment Options</h1>
+        <a href="/cart">Back</a>
+    </header>
+
+    <div class="container">
+        <h2>Select Your Payment Method</h2>
+        <div class="payment-options">
+            <div class="payment-option">
+                <img src="/static/images/credit.jpeg" alt="Credit Card">
+                <h3>Credit/Debit Card</h3>
+                <button>Pay with Card</button>
+            </div>
+            <div class="payment-option">
+                <img src="/static/images/paypal.jpeg" alt="PayPal">
+                <h3>PayPal</h3>
+                <button>Pay with PayPal</button>
+            </div>
+            <div class="payment-option">
+                <img src="/static/images/upi.jpeg" alt="UPI">
+                <h3>UPI</h3>
+                <button>Pay with UPI</button>
+            </div>
+            <div class="payment-option">
+                <img src="/static/images/cash.jpeg" alt="Cash on Delivery">
+                <h3>Cash on Delivery</h3>
+                <button>Pay on Delivery</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 E-Mandi. All rights reserved.</p>
+    </footer>
+</body>
+</html>

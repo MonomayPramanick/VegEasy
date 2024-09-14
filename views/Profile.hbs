@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fruits Store</title>
+<link rel="stylesheet" href="/static/css/home.css">   
+<link rel="stylesheet" href="/static/css/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+     .profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-1">
+            <a href="#" class="logo"><i class="fas fa-shopping-basket"></i>Veg Easy</a>
+            <form action="" class="search-box-container">
+                <input type="search" id="search-box" placeholder="    Search here..">
+                <label for="search-box" class=" fas fa-search"></label>
+            </form>
+        </div>
+        <div class="header-2">
+            <div id="menu-bar" class="fas fa-bars"></div>
+            <nav class="navbar">
+                <a href="/">home</a>               
+            <select id="nname" onchange="navigateToPage()">
+                <option value="">Select Category</option>
+                <option value="/fruit">Fruits</option>
+                <option value="/veg">Vegetables</option>
+            </select>              
+                <a href="/login">Register/Login</a>
+              
+                <a href="/market-overview">Market-overview</a>
+                <a href="/complaint-feedback">Feedback</a>
+            </nav>
+            <div class="icons">
+                <a href="/cart" class="fas fa-shopping-cart"></a>
+                <a href="#" class="fas fa-heart"></a>
+                <a href="/profile" class="fas fa-user-circle"></a>
+            </div>
+        </div>
+    </header>
+   <div class="container">
+        <div class="profile">
+            <h2>{{user.username}}</h2>
+            <div class="info">
+                <div>
+                <img src="/uploads/{{user.profilePicture}}" alt="Profile Picture" class="profile-pic">
+                    <h3>Contact Information</h3>
+                    <p><strong>Email:</strong> {{user.email}}</p>
+                    <p><strong>Phone:</strong> {{user.phone}}</p>
+                </div>
+                <div>
+                    <h3>Address</h3>
+                    <p>{{user.address}}</p>                
+                </div>
+            </div>
+            <div class="actions">
+                <a href="/edit-profile">Edit Profile</a>
+                <a href="/logout">Logout</a>
+            </div>
+        </div>
+    </div>
+         
+    <script>
+    function navigateToPage() {
+        var selectElement = document.getElementById('nname');
+        var selectedValue = selectElement.value;
+        if (selectedValue) {
+            window.location.href = selectedValue;
+        }
+    }
+</script>
+  
+</body>
+</html>
